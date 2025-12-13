@@ -24,6 +24,7 @@ export const level3: Level = {
         "To build a vertical wall at x = 3, loop over y and call place(3, i, \"wall\").",
         "This way, one short loop creates a whole wall instead of 10 manual calls."
     ],
+    tasks: [],
     validate(grid: Grid) {
         for (let y = 0; y < 10; y++) {
             if (grid[y][3].type !== "wall") {

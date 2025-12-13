@@ -22,6 +22,7 @@ export const level4: Level = {
         "In this level, loop x from 0 to 9 and only place a wall when x is even.",
         "Result: a checker pattern on the top row with walls at x = 0, 2, 4, 6, 8."
     ],
+    tasks: [],
     validate(grid: Grid) {
         for (let x = 0; x < 10; x += 2) {
             if (grid[0][x].type !== "wall") {

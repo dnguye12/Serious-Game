@@ -13,6 +13,7 @@ export interface Level {
     starterCode: string;
     palette: CellType[];
     slides: string[];
+    tasks: string[];
     validate: (grid: Grid, print: string[]) => Result[]
 }
 

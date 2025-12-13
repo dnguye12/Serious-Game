@@ -12,7 +12,7 @@ const Status = ({ res, error }: StatusProps) => {
         <div className="border rounded-xl p-6 flex flex-col">
             <h2 className="text-lg font-semibold mb-2">Status</h2>
             {
-                res.length === 0 && (
+                res.length === 0 && error.length === 0 && (
                     <p className="italic text-muted-foreground">Code result will be displayed here.</p>
                 )
             }

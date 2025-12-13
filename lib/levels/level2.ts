@@ -19,6 +19,7 @@ export const level2: Level = {
         "The first parameter x is the column, the second y is the row.",
         "The third parameter type is a string like \"wall\" that says what to place.",
     ],
+    tasks: [],
     validate(grid: Grid) {
         if (grid[0][0].type === "wall" && grid[5][5].type === "park") {
             return [

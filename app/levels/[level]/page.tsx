@@ -11,7 +11,6 @@ import Instructions from "./components/Instructions";
 import GridCanvas from "./components/GridCanvas";
 import Editor from "./components/Editor";
 import Link from "next/link";
-import Print from "./components/Print";
 import Status from "./components/Status";
 import { level2 } from "@/lib/levels/level2";
 import { level3 } from "@/lib/levels/level3";
@@ -92,9 +91,9 @@ export default function Page() {
       router.push("/levels/level2")
     } else if (param.level === "level2") {
       router.push("/levels/level3")
-    }else if (param.level === "level3") {
+    } else if (param.level === "level3") {
       router.push("/levels/level4")
-    }else {
+    } else {
       router.push("/levels")
     }
   }
@@ -113,29 +112,42 @@ export default function Page() {
     workerRef.current?.terminate()
   }, [])
 
+  useEffect(() => {
+    if (res.length === 1 && res[0].passed) {
+      try {
+        if (param.level === "level1") {
+          localStorage.setItem("lvl1Passed", JSON.stringify(true))
+        } else if (param.level === "level2") {
+          localStorage.setItem("lvl2Passed", JSON.stringify(true))
+        } else if (param.level === "level3") {
+          localStorage.setItem("lvl3Passed", JSON.stringify(true))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }, [res, param.level])
+
   return (
     <main className="p-8 flex gap-4 h-screen">
       <section className="flex-1 overflow-y-auto pr-2 flex flex-col">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <Button variant={"secondary"} size={"sm"} asChild>
             <Link href={"/levels"}><ArrowLeftIcon /> Back to menu</Link>
           </Button>
+          <div className="flex gap-2">
+            <Button onClick={run}>Run Code <SquareChevronRightIcon /></Button>
+            <Button onClick={nextLevel} variant={"secondary"} disabled={res.length !== 1 || !res[0].passed}>Next Level <SquareCheckBigIcon /></Button>
+          </div>
         </div>
         <div className="flex-1 flex flex-col">
           <Separator className="my-4" />
-          <Editor code={code} setCode={setCode} />
-          <Separator className="my-4" />
-          <div className="flex-1 grid grid-cols-3 gap-4">
-            <Instructions lvl={lvl} />
-            <div className="flex flex-col border rounded-xl p-6 gap-2">
-              <h5 className="text-lg font-semibold">Actions</h5>
-              <Button onClick={run} size={"lg"} className="w-full flex-1">Run Code <SquareChevronRightIcon /></Button>
-              <Button onClick={nextLevel} size={"lg"} variant={"secondary"} className="w-full flex-1" disabled={res.length !== 1 || !res[0].passed}>Next Level <SquareCheckBigIcon /></Button>
-            </div>
+          <div className="flex-1 flex flex-col">
+            <Editor code={code} setCode={setCode} />
           </div>
           <Separator className="my-4" />
-          <div className="flex-1 grid grid-cols-2 gap-4">
-            <Print print={print} />
+          <div className="grid grid-cols-3 gap-4">
+            <Instructions lvl={lvl} />
             <Status res={res} error={error} />
           </div>
         </div>

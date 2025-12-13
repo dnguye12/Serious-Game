@@ -776,6 +776,10 @@ html body[data-scroll-locked] {
   @apply border flex flex-col rounded-lg p-6 md:p-8 gap-3 transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-xl
 }
 
+.menu-item-loading {
+  @apply border flex flex-col rounded-lg p-6 md:p-8 gap-3 pointer-events-none opacity-50 text-white
+}
+
 .menu-item h5 {
   @apply text-base font-semibold md:text-lg text-primary-foreground
 }

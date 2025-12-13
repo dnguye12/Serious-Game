@@ -14,11 +14,8 @@ const flush = () => {
     }
 }
 
-const place = (palette: CellType[]) => {
+const place = () => {
     return (x: number, y: number, type: string) => {
-        if (!palette.includes(type as CellType)) {
-            return
-        }
         if (typeof x !== "number" || typeof y !== "number") {
             return
         }
@@ -37,8 +34,8 @@ const print = (message: string) => {
     (postMessage as any)({ type: "print", message } satisfies Command)
 }
 
-function buildApi(interpreter: any, global: any, palette: CellType[]) {
-    interpreter.setProperty(global, "place", interpreter.createNativeFunction(place(palette)))
+function buildApi(interpreter: any, global: any) {
+    interpreter.setProperty(global, "place", interpreter.createNativeFunction(place()))
     interpreter.setProperty(global, "print", interpreter.createNativeFunction((msg: any) => print(String(msg))))
     interpreter.setProperty(global, "width", interpreter.createNativeFunction(() => grid[0].length))
     interpreter.setProperty(global, "height", interpreter.createNativeFunction(() => grid.length))
@@ -60,14 +57,14 @@ self.onmessage = (e: MessageEvent<InitMsg>) => {
         return
     }
 
-    const { width, height, code, palette, maxSteps = 100000 } = msg
+    const { width, height, code, maxSteps = 100000 } = msg
     grid = Array.from({ length: height }, () =>
         Array.from({ length: width }, () => ({ type: "empty" as const }))
     );
     changes = []
 
     try {
-        const interpreter = new Interpreter(code, (intrp: any, global: any) => buildApi(intrp, global, palette))
+        const interpreter = new Interpreter(code, (intrp: any, global: any) => buildApi(intrp, global))
 
         let steps = 0
         const pump = () => {

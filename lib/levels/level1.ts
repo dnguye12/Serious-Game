@@ -2,7 +2,7 @@ import { Grid, Level, Result } from "../types"
 
 
 export const level1: Level = {
-    name: "Level 1 - Hello World",
+    name: "Level 1 - Code to Build",
     width: 12,
     height: 12,
     palette: ["wall"],
@@ -10,11 +10,12 @@ export const level1: Level = {
 // Goal: print "Hello, World!" to the console.
   `.trim(),
     slides: [
-        "Welcome! In this level you'll learn how to print text.",
-        "In JavaScript, printing to the console is done with print(...).",
-        "Strings are pieces of text wrapped in quotes, like \"Hello, World!\".",
-        "Try writing: print(\"Hello, World!\")",
-        "Run your code and check the console to see the output."
+        "Welcome, Mayor! \nThis empty land will become your city. \nThe console on top allows you to give instructions for the computer. \nWhen you press Run, the computer follows those instructions to build your city on the grid.",
+    ],
+    tasks: [
+        "Press Run once and watch what happens.",
+        "Then, change one number in the code to move the house.",
+        "Run the code again and see where the house moved."
     ],
     validate(grid: Grid, print: string[]) {
         const res: Result[] = []

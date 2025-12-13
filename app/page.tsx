@@ -11,15 +11,17 @@ const Home = () => {
                 <div className="flex-1 flex flex-col justify-center max-w-2xl">
                     <div className="flex flex-col gap-6 md:gap-8">
                         <Badge className="-mb-3">Serious Game</Badge>
-                        <h1 className=" text-pretty text-4xl lg:text-6xl font-bold ">Learn how to <span className="text-sky-400">code</span> by <span className="text-emerald-400">building</span> <span className="text-amber-400">a</span> <span className="text-rose-400">city</span>.</h1>
-                        <p className="lg:text-lg text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig doloremque mollitia fugiat omnis! Porro facilis quo animi consequatur. Explicabo.</p>
+                        <h1 className=" text-pretty text-4xl lg:text-6xl font-bold ">Learn to <span className="text-sky-400">Javascript</span> by <span className="text-emerald-400">building</span> <span className="text-amber-400">a</span> <span className="text-rose-400">city</span>.</h1>
+                        <p className="lg:text-lg text-muted-foreground">In this course, you will learn programming fundamentals with JavaScript syntax. Throughout this course, you will be tasked with applying the concepts learned in constructing a city.</p>
                         <div className="flex items-center gap-4">
                             <Button size={"lg"} asChild>
                                 <Link href={"/levels"}>
                                     <GamepadIcon /> Start Game
                                 </Link>
                             </Button>
-                            <Button size={"lg"} variant={"secondary"}><UserRoundIcon /> About Us</Button>
+                            <Button size={"lg"} variant={"secondary"} asChild>
+                                <Link href="about-us"><UserRoundIcon /> Introduction</Link>
+                            </Button>
                         </div>
                     </div>
                 </div>
