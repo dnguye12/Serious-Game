@@ -2,8 +2,6 @@
 
 import Editor from "@/components/Editor";
 import GridCanvas from "@/components/GridCanvas";
-import Status from "@/components/Status";
-import EndDialog from "@/components/EndDialog";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Command, Grid, Result } from "@/lib/types";
@@ -11,6 +9,8 @@ import { ArrowLeftIcon, SquareChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Instructions from "./components/Instructions";
+import Status from "@/components/Status";
+import EndDialog from "@/components/EndDialog";
 
 const Page = () => {
     const [grid, setGrid] = useState<Grid>(() =>
@@ -19,10 +19,22 @@ const Page = () => {
     )
     const [res, setRes] = useState<Result[]>([])
     const [code, setCode] = useState((`
-        //Starter code
-        place(0, 5, "wall")
-        place(1, 5, "wall")
-        `).trim())
+//Starter code
+/*
+// Old way:
+// place(0, 5, "wall");
+// place(1, 5, "wall");
+// place(2, 5, "wall");
+// place(3, 5, "wall");
+// place(4, 5, "wall");
+// place(5, 5, "wall");
+*/
+
+// New way: a loop that does the same thing:
+for (var x = 0; x <= 5; x = x + 1) {
+  place(x, 5, "wall");
+}
+    `).trim())
     const [tasks, setTasks] = useState({
         task1: false,
         task2: false,
@@ -81,7 +93,14 @@ const Page = () => {
         if (lastDoneRunId === runIndex) {
             const valid = async () => {
                 if (!tasks.task1) {
-                    if (grid[5][0].type === "wall" && grid[5][1].type === "wall") {
+                    let passed = true
+                    for (let i = 0; i <= 5; i++) {
+                        if (grid[5][i].type !== "wall") {
+                            passed = false
+                        }
+                    }
+
+                    if (passed) {
                         setTasks(prev => ({
                             ...prev,
                             task1: true
@@ -93,7 +112,14 @@ const Page = () => {
                         }])
                     }
                 } else if (!tasks.task2) {
-                    if (grid[5][0].type === "wall" && grid[5][1].type === "wall" && grid[5][2].type === "wall") {
+                    let passed = true
+                    for (let i = 0; i <= 10; i++) {
+                        if (grid[5][i].type !== "wall") {
+                            passed = false
+                        }
+                    }
+
+                    if (passed) {
                         setTasks(prev => ({
                             ...prev,
                             task2: true
@@ -101,20 +127,41 @@ const Page = () => {
                     } else {
                         setRes(prev => [...prev, {
                             passed: false,
-                            message: "You need 3 walls at (0,5) (1,5) (2,5)"
+                            message: "Please modify the loop to have a wall from (0,5) to (0, 10)"
                         }])
                     }
                 } else if (!tasks.task3) {
-                    if (grid[5][0].type === "wall" && grid[5][1].type === "wall" && grid[5][2].type === "wall" && grid[5][3].type === "wall" && grid[5][4].type === "wall" && grid[5][5].type === "wall") {
+                    let passed1 = true
+                    let passed2 = true
+                    for (let i = 0; i <= 10; i++) {
+                        if (grid[5][i].type !== "wall") {
+                            passed1 = false
+                        }
+                    }
+                    for (let i = 0; i <= 7; i++) {
+                        if (grid[i][11].type !== "wall") {
+                            passed2 = false
+                        }
+                    }
+
+                    if (passed1 && passed2) {
                         setTasks(prev => ({
                             ...prev,
                             task3: true
                         }))
                     } else {
-                        setRes(prev => [...prev, {
-                            passed: false,
-                            message: "You need 6 walls at (0,5) (1,5) (2,5) (3,5) (4,5) (5,5)"
-                        }])
+                        if (!passed1) {
+                            setRes(prev => [...prev, {
+                                passed: false,
+                                message: "You need to have a wall from (0,5) to (0, 10)"
+                            }])
+                        }
+                        if (!passed2) {
+                            setRes(prev => [...prev, {
+                                passed: false,
+                                message: "You need to have a wall from (11,0) to (11, 7)"
+                            }])
+                        }
                     }
                 }
             }
@@ -125,7 +172,7 @@ const Page = () => {
     useEffect(() => {
         if (tasks.task1 && tasks.task2 && tasks.task3) {
             const handleEnd = () => {
-                localStorage.setItem("lvl2Passed", JSON.stringify(true))
+                localStorage.setItem("lvl4Passed", JSON.stringify(true))
                 setEnd(true)
             }
             handleEnd()
@@ -140,7 +187,7 @@ const Page = () => {
         <main className="p-8 flex gap-4 h-screen">
             <EndDialog
                 end={end}
-                url="/game/level3"
+                url="/levels"
             />
 
             <section className="flex-1 overflow-y-auto pr-2 flex flex-col">

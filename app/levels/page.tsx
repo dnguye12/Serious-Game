@@ -75,12 +75,12 @@ const Page = () => {
                     {
                         lvl2Passed ?
                             (
-                                <Link href={"/levels/level3"} className="menu-item bg-amber-400 hover:bg-amber-500">
+                                <Link href={"/game/level3"} className="menu-item bg-amber-400 hover:bg-amber-500">
                                     <div className="flex items-center gap-3">
                                         <RefreshCcwIcon className="text-primary-foreground" />
-                                        <h5>Level 3 - First Loop</h5>
+                                        <h5>Level 3 - Remembering a Spot</h5>
                                     </div>
-                                    <p>Use a loop to build a full wall with just a few lines of code.</p>
+                                    <p>Variables as named boxes that store numbers; reuse them.</p>
                                 </Link>
                             )
                             :
@@ -88,9 +88,9 @@ const Page = () => {
                                 <div className="menu-item-loading bg-amber-400">
                                     <div className="flex items-center gap-3">
                                         <RefreshCcwIcon className="text-primary-foreground" />
-                                        <h5>Level 3 - First Loop</h5>
+                                        <h5>Level 3 - Remembering a Spot</h5>
                                     </div>
-                                    <p>Use a loop to build a full wall with just a few lines of code.</p>
+                                    <p>Variables as named boxes that store numbers; reuse them.</p>
                                 </div>
                             )
                     }
@@ -101,9 +101,9 @@ const Page = () => {
                                 <Link href={"/levels/level4"} className="menu-item bg-rose-400 hover:bg-rose-500">
                                     <div className="flex items-center gap-3">
                                         <EqualIcon className="text-primary-foreground" />
-                                        <h5>Level 4 - Conditions</h5>
+                                        <h5>Level 4 - Repeating Yourself Less</h5>
                                     </div>
-                                    <p>Combine loops and conditionals to create a magic.</p>
+                                    <p>Compare “many lines” vs “one loop”. Loop as “repeat N times”.</p>
                                 </Link>
                             )
                             :
@@ -111,9 +111,9 @@ const Page = () => {
                                 <div className="menu-item-loading bg-rose-400">
                                     <div className="flex items-center gap-3">
                                         <EqualIcon className="text-primary-foreground" />
-                                        <h5>Level 4 - Conditions</h5>
+                                        <h5>Level 4 - Repeating Yourself Less</h5>
                                     </div>
-                                    <p>Combine loops and conditionals to create a magic.</p>
+                                    <p>Compare “many lines” vs “one loop”. Loop as “repeat N times”.</p>
                                 </div>
                             )
                     }

@@ -1,7 +1,7 @@
 "use client"
 
-import Editor from "@/app/levels/[level]/components/Editor";
-import GridCanvas from "@/app/levels/[level]/components/GridCanvas";
+import Editor from "@/components/Editor";
+import GridCanvas from "@/components/GridCanvas";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Command, Grid, Result } from "@/lib/types";
@@ -9,7 +9,7 @@ import { ArrowLeftIcon, SquareChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Instructions from "./components/Instructions";
-import Status from "@/app/levels/[level]/components/Status";
+import Status from "@/components/Status";
 import EndDialog from "@/components/EndDialog";
 
 const Page = () => {
